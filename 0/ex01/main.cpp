@@ -1,4 +1,3 @@
-#include "Contact.hpp"
 #include "PhoneBook.hpp"
 #include <cctype>
 #include <cstdio>
@@ -32,8 +31,8 @@ void	add(PhoneBook& phunkButt)
 	int phone_no = atoi(input.c_str());
 
 	phunkButt.addContact(first_name, last_name, nickname, darkest_secret, phone_no);
-	if (phunkButt.total_contact < 8)
-		phunkButt.total_contact++;
+	if (phunkButt.get_total() < 8)
+		phunkButt.set_total(phunkButt.get_total() + 1);
 }
 
 void	string_checker(std::string& str)
@@ -49,16 +48,16 @@ void	string_checker(std::string& str)
 }
 
 void search(PhoneBook& phonkButt){
-	if (phonkButt.total_contact == 0)
+	if (phonkButt.get_total() == 0)
 	{
 		std::cout << "phonkButt can't remember any contact stored\n";
 		return ;
 	}
 	std::cout << "     index" << "|" << "first name" << "|" << " last name" << "|" << "  nickname\n";
-	for (int i = 0; i < phonkButt.total_contact; i++){
-		std::string first_name = phonkButt.contacts[i].first_name;
-		std::string last_name = phonkButt.contacts[i].last_name;
-		std::string nickname= phonkButt.contacts[i].nickname;
+	for (int i = 0; i < phonkButt.get_total(); i++){
+		std::string first_name = phonkButt.getContact(i).getFirst();
+		std::string last_name = phonkButt.getContact(i).getLast();
+		std::string nickname= phonkButt.getContact(i).getNick();
 		std::cout << "         " << i << "|";
 		string_checker(first_name);
 		std::cout << "|";
@@ -70,16 +69,16 @@ void search(PhoneBook& phonkButt){
 	std::string input;
 	getline(std::cin, input);
 	int index = atoi(input.c_str());
-	if (index < 0 || index > phonkButt.total_contact)
+	if (index < 0 || index > phonkButt.get_total())
 	{
 		std::cout << "PhonkButt is mad and will make you restart\n";
 		return ;
 	}
-	std::cout << phonkButt.contacts[index].first_name << "\n";
-	std::cout << phonkButt.contacts[index].last_name << "\n";
-	std::cout << phonkButt.contacts[index].nickname << "\n";
-	std::cout << phonkButt.contacts[index].darkest_secret << "\n";
-	std::cout << phonkButt.contacts[index].phone_number << "\n";
+	std::cout << phonkButt.getContact(index).getFirst() << "\n";
+	std::cout << phonkButt.getContact(index).getLast() << "\n";
+	std::cout << phonkButt.getContact(index).getNick() << "\n";
+	std::cout << phonkButt.getContact(index).getSecret() << "\n";
+	std::cout << phonkButt.getContact(index).getPhoneNo() << "\n";
 }
 
 int	main(void)
@@ -88,21 +87,24 @@ int	main(void)
 	std::string input;
 
 	std::cout << "Welcome to PhonkButt\n";
-	std::cout << "Please enter the following\n";
-	std::cout << "ADD: To save a new contact\n";
-	std::cout << "SEARCH: To display a specific contact\n";
-	std::cout << "EXIT: To exit the program (PhonkButt is senile and will forget everything)\n";
 	while (true)
 	{
+		std::cout << "Please enter the following\n";
+		std::cout << "ADD: To save a new contact\n";
+		std::cout << "SEARCH: To display a specific contact\n";
+		std::cout << "EXIT: To exit the program (PhonkButt is senile and will forget everything)\n";
+		std::cout << "PhunkButt: ";
 		getline(std::cin, input);
 		// for (int i = 0; i < input.length(); i++){
 		// 	toupper(input.);
 		// }
-		if (input.compare("ADD"))
+		if (!input.compare("ADD"))
 			add(phunkButt);
-		else if (input.compare("SEARCH"))
+		else if (!input.compare("SEARCH"))
 			search(phunkButt);
-		else if (input.compare("EXIT"))
+		else if (!input.compare("EXIT"))
 			break ;
+		else
+			std::cout << "PhunkButt: LEarN To Read.....\n";
 	}
 }

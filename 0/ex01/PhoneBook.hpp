@@ -6,11 +6,11 @@
 # define MAX_CONTACT 8
 
 class PhoneBook{
-public:
+private:
 	Contact contacts[MAX_CONTACT];
 	int	current_contact;
 	int	total_contact;
-
+public:
 	PhoneBook();
 	PhoneBook(const PhoneBook& other);
 	PhoneBook& operator=(const PhoneBook& other);
@@ -21,7 +21,11 @@ public:
 	 std::string nickname,
 	 std::string darkest_secret,
 	 int phone_no);
-	Contact *getContact();
+	Contact	getContact(int idx);
+	void	set_current(int current_idx);
+	int		get_current();
+	void	set_total(int total);
+	int		get_total();
 };
 
 #endif // !CONTACT_HPP
