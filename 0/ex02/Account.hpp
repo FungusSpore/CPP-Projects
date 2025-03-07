@@ -16,6 +16,9 @@
 //                               Account Class                                //
 // ************************************************************************** //
 
+#include <iostream>
+#include <ctime>
+
 class Account {
 
 
@@ -36,6 +39,7 @@ public:
 	bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
 	void	displayStatus( void ) const;
+	void	fuck_yourself( void );
 
 
 private:

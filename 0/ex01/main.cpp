@@ -2,7 +2,6 @@
 #include <cctype>
 #include <cstdio>
 #include <iostream>
-#include <iterator>
 #include <ostream>
 #include <string>
 #include <strings.h>

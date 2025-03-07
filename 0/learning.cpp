@@ -90,12 +90,17 @@
 // }
 
 #include <iostream>
+#include <ctime>
+
+using namespace std;
 
 int main (void)
 {
-	int i = 0;
-	int& j;
-	int& z = j;
-	std::cout << i << j << z;
-	std::cout << i << j << z;
+	time_t now = time(0);
+
+	tm *ltm = localtime(&now);
+	char buffer[100];
+	strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", ltm);
+	cout << buffer << endl;
+
 }
