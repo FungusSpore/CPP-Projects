@@ -64,27 +64,38 @@
 //     return 0;
 // }
 //
+// #include <iostream>
+// class Example {
+// public:
+//     int number;            // in-class initializer
+//     std::string text;          // std::string's default constructor makes it an empty string
+//
+//     // Default constructor (could be omitted if no other constructors are defined)
+//     Example() {
+//         // Additional initialization if needed
+//     }
+// 		Example(int number)
+// 		{
+//
+// 		}
+// };
+// int main(void)
+// {
+// 	Example test;
+// 	if (*(test.text.c_str()) == '\0')
+// 		std::cout << "true";
+// 	std::string str = "Hello";
+// 	std::cout << str;
+// 	std::cout << str.length();
+// }
+
 #include <iostream>
-class Example {
-public:
-    int number;            // in-class initializer
-    std::string text;          // std::string's default constructor makes it an empty string
 
-    // Default constructor (could be omitted if no other constructors are defined)
-    Example() {
-        // Additional initialization if needed
-    }
-		Example(int number)
-		{
-
-		}
-};
-int main(void)
+int main (void)
 {
-	Example test;
-	if (*(test.text.c_str()) == '\0')
-		std::cout << "true";
-	std::string str = "Hello";
-	std::cout << str;
-	std::cout << str.length();
+	int i = 0;
+	int& j;
+	int& z = j;
+	std::cout << i << j << z;
+	std::cout << i << j << z;
 }

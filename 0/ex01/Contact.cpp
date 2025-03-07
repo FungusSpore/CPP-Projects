@@ -23,7 +23,7 @@ Contact& Contact::operator=(const Contact& other){
 }
 
 Contact::~Contact(){
-	delete this;
+	// delete this;
 }
 
 void Contact::setFirst(std::string first_name){

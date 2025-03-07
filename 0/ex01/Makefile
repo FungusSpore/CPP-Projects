@@ -2,7 +2,7 @@ NAME = phonkbutt
 SOURCE = Contact.cpp PhoneBook.cpp main.cpp
 OBJ = $(SOURCE:.c=.o)
 # HEADERS = Contact.hpp PhoneBook.hpp
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -fsanitize=address -Wall -Wextra -Werror -std=c++98
 CC = c++
 
 all: $(NAME)

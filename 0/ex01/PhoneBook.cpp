@@ -28,7 +28,7 @@ PhoneBook& PhoneBook::operator=(const PhoneBook& other){
 }
 
 PhoneBook::~PhoneBook(){
-	delete (this);
+	// delete (this);
 }
 
 void PhoneBook::addContact(
@@ -44,6 +44,7 @@ void PhoneBook::addContact(
 	PhoneBook::contacts[array_idx].setNick(nickname);
 	PhoneBook::contacts[array_idx].setSecret(darkest_secret);
 	PhoneBook::contacts[array_idx].setPhoneNo(phone_no);
+	PhoneBook::current_contact++;
 }
 
 Contact	PhoneBook::getContact(int idx){
