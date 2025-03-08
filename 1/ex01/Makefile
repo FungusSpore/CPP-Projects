@@ -1,5 +1,5 @@
-NAME = zombieMaker
-SOURCE = Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
+NAME = zombieHordeMaker
+SOURCE = Zombie.cpp zombieHorde.cpp main.cpp
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
 CC = c++

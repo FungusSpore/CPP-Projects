@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/08 17:59:31 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/08 18:08:57 by jianwong         ###   ########.fr       */
+/*   Created: 2025/03/09 01:01:18 by jianwong          #+#    #+#             */
+/*   Updated: 2025/03/09 01:14:59 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie*	newZombie(std::string name){
-	Zombie	*walker = new Zombie();
+int	main(void){
+	Zombie *horde = zombieHorde(10, "John Does");
 
-	walker->setName(name);
-	return (walker);
+	for (int i = 0; i < 10; i++){
+		horde[i].announce();
+	}
+	delete[] (horde);
 }
-
