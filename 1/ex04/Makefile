@@ -7,7 +7,7 @@ CC = c++
 all: $(NAME)
 
 $(NAME): $(SOURCE)
-	$(CC) $(SANITIZE) $(FLAGS) $^ -o $@
+	$(CC) $(FLAGS) $^ -o $@
 
 fclean:
 	rm -f $(NAME)

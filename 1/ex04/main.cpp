@@ -6,11 +6,13 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 17:55:26 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/10 00:46:04 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/11 23:41:19 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstddef>
 #include <cstdio>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -19,9 +21,8 @@ int	main(int argc, char **argv){
 	std::string	infile;
 	std::string	outfile;
 	std::string line;
-
-	if (argc != 4){
-		std::cerr << "Error: ./loser <filename> <s1> <s2>" << std::endl;
+	
+if (argc != 4){ std::cerr << "Error: ./loser <filename> <s1> <s2>" << std::endl;
 		return (1);
 	}
 
@@ -32,7 +33,7 @@ int	main(int argc, char **argv){
 		return (2);
 	}
 
-	outfile += ".replace";
+	outfile = infile + ".replace";
 	std::ofstream	file2(outfile.c_str());
 	if(!file2.is_open()){
 		std::cerr << "Error: file2 error" << std::endl;
@@ -40,6 +41,16 @@ int	main(int argc, char **argv){
 	}
 
 	while (std::getline(file1, line)){
-		std::cout << line << std::endl;
+		size_t	found = 0;
+
+		while (true){
+			found = line.find(argv[2], found);
+			if (found == std::string::npos)
+				break ;
+			line.erase(found, strlen(argv[2]));
+			line.insert(found, argv[3]);
+			found++;
+		}
+		file2 << line << "\n";
 	}
 }
