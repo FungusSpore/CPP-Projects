@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 23:03:07 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/14 23:48:12 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/14 23:05:28 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,6 @@ Fixed& Fixed::operator=(const Fixed& other){
 	}
 	return (*this);
 }
-
-bool operator>(const Fixed& other);
-bool operator<(const Fixed& other);
-bool operator>=(const Fixed& other);
-bool operator<=(const Fixed& other);
-bool operator==(const Fixed& other);
-bool operator!=(const Fixed& other);
-
-bool operator+(const Fixed& other);
-bool operator-(const Fixed& other);
-bool operator*(const Fixed& other);
-bool operator/(const Fixed& other);
 
 std::ostream& operator<<(std::ostream &os, const Fixed& current){
 	os << current.toFloat();
