@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:39:33 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/14 23:45:19 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/16 01:34:13 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FIXED_HPP
 
 # include <iostream>
-# include <string>
 # include <cmath>
 
 class Fixed
@@ -30,17 +29,18 @@ public:
 	Fixed(const Fixed& other);
 
 	Fixed& operator=(const Fixed& other);
-	Fixed& operator>(const Fixed& other);
-	Fixed& operator<(const Fixed& other);
-	Fixed& operator>=(const Fixed& other);
-	Fixed& operator<=(const Fixed& other);
-	Fixed& operator==(const Fixed& other);
-	Fixed& operator!=(const Fixed& other);
 
-	Fixed& operator+(const Fixed& other);
-	Fixed& operator-(const Fixed& other);
-	Fixed& operator*(const Fixed& other);
-	Fixed& operator/(const Fixed& other);
+	bool operator>(const Fixed& other);
+	bool operator<(const Fixed& other);
+	bool operator>=(const Fixed& other);
+	bool operator<=(const Fixed& other);
+	bool operator==(const Fixed& other);
+	bool operator!=(const Fixed& other);
+
+	Fixed operator+(const Fixed& other);
+	Fixed operator-(const Fixed& other);
+	Fixed operator*(const Fixed& other);
+	Fixed operator/(const Fixed& other);
 
 	//pre
 	Fixed& operator++();
@@ -59,9 +59,9 @@ public:
 	int toInt(void) const;
 
 	static Fixed& min(Fixed& x, Fixed& y);
-	static Fixed& min(const Fixed& x, const Fixed& y);
+	static const Fixed& min(const Fixed& x, const Fixed& y);
 	static Fixed& max(Fixed& x, Fixed& y);
-	static Fixed& max(const Fixed& x, const Fixed& y);
+	static const Fixed& max(const Fixed& x, const Fixed& y);
 };
 
 #endif
