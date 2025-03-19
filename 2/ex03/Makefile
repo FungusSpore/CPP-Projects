@@ -1,5 +1,5 @@
 NAME = a.out
-SOURCE = Fixed.cpp main.cpp
+SOURCE = Fixed.cpp Point.cpp bsp.cpp main.cpp
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
 CC = c++
