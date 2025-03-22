@@ -1,5 +1,5 @@
 NAME = a.out
-SOURCE = Dog.cpp Cat.cpp Animal.cpp main.cpp
+SOURCE = Dog.cpp Cat.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
 CC = c++

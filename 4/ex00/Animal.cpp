@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 18:46:55 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/21 18:52:06 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:56:51 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ Animal::~Animal(){
 	std::cout << "Animal destructor called" << std::endl;
 }
 
-std::string Animal::getType(){
+std::string Animal::getType() const{
 	return (type);
+}
+
+void Animal::makeSound() const{
+	std::cout << "Random animal noises" << std::endl;
 }
