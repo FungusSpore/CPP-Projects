@@ -6,12 +6,14 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 01:42:12 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/24 01:42:52 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:16:42 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IMATERIASOURCE_HPP
 # define IMATERIASOURCE_HPP
+
+# include "AMateria.hpp"
 
 class IMateriaSource
 {

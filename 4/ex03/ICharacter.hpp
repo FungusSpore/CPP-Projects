@@ -6,12 +6,14 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 01:39:45 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/24 01:41:22 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:01:08 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_H
 # define ICHARACTER_H
+
+# include "AMateria.hpp"
 
 class ICharacter{
 public:
