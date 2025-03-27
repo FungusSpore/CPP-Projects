@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   Garbage.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 14:39:58 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/27 14:04:45 by jianwong         ###   ########.fr       */
+/*   Created: 2025/03/27 17:12:47 by jianwong          #+#    #+#             */
+/*   Updated: 2025/03/27 17:38:04 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_H
-# define ICE_H
+#ifndef GARBAGE_HPP
+# define GARBAGE_HPP
 
-# include "AMateria.hpp"
-# include "Character.hpp"
+#include "AMateria.hpp"
 
-class Ice: public AMateria{
+struct Bin{
+	AMateria* data;
+	Bin* next;
+};
+
+# include <iostream>
+
+class Garbage{
+protected:
+	Bin* head;
 public:
-	Ice();
-	Ice(const Ice& other);
-	Ice& operator=(const Ice& other);
-	~Ice();
+	Garbage();
+	Garbage(const Garbage& other);
+	Garbage& operator=(const Garbage& other);
+	~Garbage();
 
-	std::string const & getType() const; // return materia type
-	AMateria* clone() const;
-	virtual void use(ICharacter& target);
+	void throwRubbish(AMateria *data);
 };
 
 #endif

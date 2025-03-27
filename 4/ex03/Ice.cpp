@@ -6,17 +6,14 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:39:35 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/27 01:50:47 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:04:39 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
+#include "AMateria.hpp"
 
-Ice::Ice():AMateria(){
-	std::cout << "Ice default contructor called" << std::endl;
-}
-
-Ice::Ice(std::string const & type):AMateria(type){
+Ice::Ice():AMateria("ice"){
 	std::cout << "Ice default contructor called" << std::endl;
 }
 
@@ -41,13 +38,11 @@ std::string const & Ice::getType() const{
 	return (type);
 }
 
-Ice* Ice::clone() const{
-	Ice* imposter = new Ice(*this);
+AMateria* Ice::clone() const{
+	AMateria* imposter = new Ice(*this);
 	return (imposter);
 }
 
-void use(ICharacter& target){
-	std::cout << "* heals " << target
-						<< "'s wounds *"
-						<< std::endl;
+void Ice::use(ICharacter& target){
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

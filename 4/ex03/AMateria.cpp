@@ -6,11 +6,12 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:56:35 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/26 14:28:12 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:38:01 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include "Character.hpp"
 
 AMateria::AMateria():type("Unknown"){
 	std::cout << "AMateria default contructor called" << std::endl;
@@ -41,6 +42,6 @@ std::string const & AMateria::getType() const{
 	return (type);
 }
 
-void use(ICharacter& target){
-
+void AMateria::use(ICharacter& target){
+	std::cout << "* Unknown Magic fizzles out " << target.getName() << " *" << std::endl;
 }

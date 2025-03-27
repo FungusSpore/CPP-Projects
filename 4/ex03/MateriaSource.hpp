@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 22:27:18 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/26 23:19:30 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:25:41 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 
 class MateriaSource: public IMateriaSource{
 private:
-	AMateria* source[4];
-public:
+	AMateria** source; public:
 	MateriaSource();
 	MateriaSource(const MateriaSource& other);
 	MateriaSource& operator=(const MateriaSource& other);

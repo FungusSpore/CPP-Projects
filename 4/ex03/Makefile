@@ -1,5 +1,5 @@
 NAME = a.out
-SOURCE = Brain.cpp Dog.cpp Cat.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+SOURCE = Garbage.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
 CC = c++
