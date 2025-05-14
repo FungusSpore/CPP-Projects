@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:39:33 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/16 01:34:13 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:14:38 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ public:
 	Fixed	 operator++(int);
 	Fixed	 operator--(int);
 
-	friend std::ostream &operator<<(std::ostream &os, const Fixed& current);
 	~Fixed();
 
 
@@ -64,4 +63,5 @@ public:
 	static const Fixed& max(const Fixed& x, const Fixed& y);
 };
 
+std::ostream &operator<<(std::ostream &os, const Fixed& current);
 #endif

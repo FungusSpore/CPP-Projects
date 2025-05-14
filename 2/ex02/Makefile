@@ -1,18 +1,24 @@
 NAME = a.out
 SOURCE = Fixed.cpp main.cpp
+OBJ = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
 CC = c++
 
 all: $(NAME)
 
-$(NAME): $(SOURCE)
-	$(CC) $(FLAGS) $^ -o $@
+$(NAME): $(OBJ)
+	$(CC) $^ -o $(NAME)
 
-debug: $(SOURCE)
-	$(CC) $(SANITIZE) $(FLAGS) $^ -o $@
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
-fclean:
+clean:
+	rm -f *.o
+
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
