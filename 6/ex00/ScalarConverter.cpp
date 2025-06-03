@@ -8,15 +8,6 @@
 #include <cstdlib>
 #include <iomanip>
 
-// toChar will treat all float and double as invalid
-// it will also treat all non-printable as invalid as well
-
-// toInt will treat values from float and double greater or lesser than intmax/min to be invalid
-
-// toFloat and toDouble will take any input
-
-// if nan inf only float and double can display
-
 std::string detect(std::string value){
 	const std::string special_litterals[6] = {"nan", "inf", "-inf", "nanf", "inff", "-inff"};
 
