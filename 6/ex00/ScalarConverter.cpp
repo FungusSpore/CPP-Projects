@@ -20,18 +20,18 @@
 std::string detect(std::string value){
 	const std::string special_litterals[6] = {"nan", "inf", "-inf", "nanf", "inff", "-inff"};
 
-	if (value.length() == 1 && !std::isdigit(value[0]))
-		return ("char");
-	if (value[value.length() - 1] == 'f')
-		return ("float");
-	if (value.find('.'))
-		return ("double");
 	for (int i = 0; i < 6; i++){
 		if (i < 3 && value == special_litterals[i])
 			return ("double");
 		if (value == special_litterals[i])
 			return ("float");
 	}
+	if (value.length() == 1 && !std::isdigit(value[0]))
+		return ("char");
+	if (value[value.length() - 1] == 'f')
+		return ("float");
+	if (value.find('.'))
+		return ("double");
 	return ("int");
 }
 
@@ -46,6 +46,8 @@ bool	is_valid(std::string value){
 		return (true);
 
 	for (int i = 0; i < static_cast<int>(value.length()); i++){
+		if (i == 0 && value[i] == '-')
+			i++;
 		if (!std::isdigit(value[i]) && value[i] != '.'){
 			if (i == static_cast<int>(value.length()) - 1 && value[i] == 'f')
 				break ;
@@ -57,8 +59,8 @@ bool	is_valid(std::string value){
 
 template <typename T>
 void	printConverts(T value){
-	std::cout << value << std::endl;
-	std::cout << static_cast<int>(value) << std::endl;
+	// std::cout << value << std::endl;
+	// std::cout << static_cast<int>(value) << std::endl;
 
 	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
 		std::cout << "char: Impossible" << std::endl;
@@ -100,8 +102,10 @@ void	toFloat(std::string value){
 	int		i;
 
 	for (i = 0; i < 3; i++){
-		if (value == special_floats[i])
+		if (value == special_floats[i]){
 			possible = false;
+			break;
+		}
 	}
 	if (possible)
 		number = std::atof(value.c_str());
@@ -125,8 +129,10 @@ void	toDouble(std::string value){
 	int		i;
 
 	for (i = 0; i < 3; i++){
-		if (value == special_doubles[i])
+		if (value == special_doubles[i]){
 			possible = false;
+			break ;
+		}
 	}
 	if (possible)
 		number = std::atof(value.c_str());
