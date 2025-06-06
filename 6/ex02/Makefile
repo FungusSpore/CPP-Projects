@@ -1,5 +1,5 @@
 NAME = a.out
-SOURCE = Serializer.cpp Data.cpp main.cpp
+SOURCE = Base.cpp main.cpp
 OBJ = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address

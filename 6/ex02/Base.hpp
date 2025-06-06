@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 14:05:35 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/06 14:40:04 by jianwong         ###   ########.fr       */
+/*   Created: 2025/06/06 15:08:39 by jianwong          #+#    #+#             */
+/*   Updated: 2025/06/06 19:29:35 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
-#include "Serializer.hpp"
-#include <iostream>
+#ifndef BASE_HPP
+# define BASE_HPP
 
-int main(void){
-	Data data;
-	uintptr_t seriliazed_data = Serializer::serialize(&data);
+class Base{
+	public:
+		Base();
+		virtual ~Base();
+};
 
-	std::cout << &data << std::endl;
-	std::cout << seriliazed_data << std::endl;
-	std::cout << Serializer::deserialize(seriliazed_data) << std::endl;
-}
+class A: public Base{
+	public:
+		A();
+};
+
+class B: public Base{
+	public:
+		B();
+};
+
+class C: public Base{
+	public:
+		C();
+};
+
+Base* generate(void);
+void	identify(Base* p);
+void	identify(Base& p);
+
+#endif
+

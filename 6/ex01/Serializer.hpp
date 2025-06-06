@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 17:04:15 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/03 17:27:50 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:37:14 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string>
 # include "Data.hpp"
+#	include <stdint.h>
 
 class Serializer{
 	private:
