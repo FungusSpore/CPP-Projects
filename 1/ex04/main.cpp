@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 17:55:26 by jianwong          #+#    #+#             */
-/*   Updated: 2025/03/11 23:41:19 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/10 22:18:30 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ if (argc != 4){ std::cerr << "Error: ./loser <filename> <s1> <s2>" << std::endl;
 				break ;
 			line.erase(found, strlen(argv[2]));
 			line.insert(found, argv[3]);
-			found++;
+			found += strlen(argv[3]);
 		}
 		file2 << line << "\n";
 	}
