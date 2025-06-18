@@ -6,51 +6,66 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:54:56 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/17 16:05:57 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/18 22:35:17 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MUTANTSTACK_HPP
 # define MUTANTSTACK_HPP
 
-#include <iterator>
+#include <deque>
 #include <stack>
 
 
-template <typename T>
-class MutantStack: public std::stack<T>{
-	struct iterator{
-		using value_type = T;	
-		using Pointer = T*;
-		using Reference = T&;
+template <typename T, class Container = std::deque<T> >
+class MutantStack: public std::stack<T, Container>{
+public:
+	typedef typename std::stack<T, Container>::container_type::iterator								iterator;
+	typedef typename std::stack<T, Container>::container_type::const_iterator					const_iterator;
+	typedef typename std::stack<T, Container>::container_type::reverse_iterator				reverse_iterator;
+	typedef typename std::stack<T, Container>::container_type::const_reverse_iterator const_reverse_iterator;
 
-		iterator(Pointer ptr);
+	// Orthodox
+	MutantStack(){}
+	MutantStack(const MutantStack& other) : std::stack<T, Container>(other) {};
+	MutantStack& operator=(const MutantStack& other){
+		if (this != &other){
+			std::stack<T,Container>::operator=(other);
+		}
+		return (*this);
+	}
+	~MutantStack(){}
 
-		T& operator*();
+	// iterator definition
+	iterator begin(){
+		return (std::stack<T, Container>::c.begin());
+	}
+	iterator end(){
+		return (std::stack<T, Container>::c.end());
+	}
 
-		bool operator!=(const iterator& other);
-		bool operator==(const iterator& other);
-		//pre
-		iterator& operator++();
-		iterator& operator--();
-		//post
-		iterator	 operator++(int);
-		iterator	 operator--(int);
+	const_iterator begin() const{
+		return (std::stack<T, Container>::c.begin());
+	}
+	const_iterator end() const{
+		return (std::stack<T, Container>::c.end());
+	}
 
-		private:
-			Pointer mPtr;
-			size_t size;
-			
-	};
-	public:
-		MutantStack();
-		MutantStack(const MutantStack& other);
-		MutantStack& operator=(const MutantStack& other);
-		~MutantStack();
+	reverse_iterator rbegin(){
+		return (std::stack<T, Container>::c.rbegin());
+	}
+	reverse_iterator rend(){
+		return (std::stack<T, Container>::c.rend());
+	}
 
-		iterator begin();
-		iterator end();
-
+	const_reverse_iterator rbegin() const{
+		return (std::stack<T, Container>::c.rbegin());
+	}
+	const_reverse_iterator rend() const{
+		return (std::stack<T, Container>::c.rend());
+	}
 };
+
+// #include "MutantStack.tpp"
 
 #endif

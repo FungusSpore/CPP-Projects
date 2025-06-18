@@ -1,5 +1,5 @@
 NAME = a.out
-SOURCE = Span.cpp main.cpp
+SOURCE = main.cpp
 OBJ = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
