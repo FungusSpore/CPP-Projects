@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 17:40:26 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/20 18:39:02 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/20 22:52:49 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ struct tmComparitor {
 		if (lhs.tm_mon != rhs.tm_mon)
 			return (lhs.tm_mon < rhs.tm_mon);
 		return (lhs.tm_mday < rhs.tm_mday);
-	// 	return (std::tie(lhs.tm_year, lhs.tm_mon, lhs.tm_mday) \
-	// < std::tie(rhs.tm_year, rhs.tm_mon, rhs.tm_mday));
 	}
 };
 
 class BitcoinExchange{
 private:
-	std::map<tm, float> database;
+	std::map<tm, float, tmComparitor<tm> > database;
 		
 public:
 	BitcoinExchange();
@@ -46,11 +44,12 @@ public:
 	BitcoinExchange& operator=(const BitcoinExchange& other);
 	~BitcoinExchange();
 
+	float	exchangeRate(tm date);
+
 	static bool		date_format_checker(std::string date_str);
 	static bool		date_parser(std::string date_str, tm& date);
 	static float	value_parser(std::string value_str);
 	static bool		value_format_checker(float value);
-	static float	exchangeRate(tm date);
 
 	class FileCannotOpen : public std::exception{
 	private:
