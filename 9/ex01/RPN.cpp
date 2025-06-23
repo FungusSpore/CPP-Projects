@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 02:33:34 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/23 00:48:52 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:17:25 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,10 @@
 #include <cctype>
 #include <cstring>
 #include <list>
+#include <ostream>
 #include <string>
 #include <cstdlib>
 #include <iostream>
-
-// spliter
-// split all by space
-
-// format
-// check if any more than 2 lenght
-// check for first 2 being numbers
-// then alternating with +-*/ then numbers
-// and with special
-// if fail throw execption
-
-// print
-// using ostream print out based on requirement
 
 void RPN::split(std::string input){
 	size_t i;
@@ -41,14 +29,15 @@ void RPN::split(std::string input){
 
 	while (found != std::string::npos){
 		this->expression.push_back(input.substr(0, found));
+		input.erase(0, found + 1);
 		found = input.find(" ");
-		input.erase(0, found);
 	}
-
+	this->expression.push_back(input);
 }
 
 bool RPN::is_formatted(){
 	std::list<std::string>::iterator it = this->expression.begin();
+	const std::string op = "+-*/";
 
 	for (; it != this->expression.end(); it++)
 		if (it->size() != 1)
@@ -63,7 +52,7 @@ bool RPN::is_formatted(){
 	bool isOperator = true;
 	for (; it != this->expression.end(); it++){
 		if (isOperator){
-			if (strcmp("+-*/", it->c_str()) != 0)
+			if (op.find(it->c_str()) == std::string::npos)
 				return (false);
 			isOperator = false;
 		}
@@ -82,18 +71,15 @@ void RPN::calculate(){
 	const std::string op[4] = {"+", "-", "*", "/"};
 	std::list<std::string>::iterator it = this->expression.begin();
 	int a = atoi(it++->c_str());
-	int b;
-
+	int b = atoi(it++->c_str());
 
 	for (; it != this->expression.end(); it++){
 		size_t i;
-		// get operator
-		b = atoi(it++->c_str());
+
 		for (i = 0; i < 4; i++){
 			if (*it == op[i])
 				break ;
 		}
-		// calculate value using a and b then assign to a
 		switch (i) {
 			case 0:
 			  a += b;
@@ -105,14 +91,17 @@ void RPN::calculate(){
 			  a *= b;
 			  break ;
 			case 3:
+				if (b == 0)
+					throw GeneralError("Cannot divde by zero");
 			  a /= b;
 			  break ;
 		}
-		// move it get new number assign to b
-		// if (it != this->expression.end())
-		// loop
+		if (++it == this->expression.end()){
+			break ;
+		}
+		b = atoi(it->c_str());
 	}
-	result = a;
+	this->result = a;
 }
 
 RPN::RPN(){}
