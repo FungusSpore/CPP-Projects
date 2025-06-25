@@ -6,18 +6,18 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 02:33:34 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/23 16:17:25 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:26:15 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 #include <cctype>
 #include <cstring>
-#include <list>
-#include <ostream>
-#include <string>
 #include <cstdlib>
-#include <iostream>
+
+//=================================
+// HELPER FUNCTIONS
+//=================================
 
 void RPN::split(std::string input){
 	size_t i;
@@ -104,6 +104,10 @@ void RPN::calculate(){
 	this->result = a;
 }
 
+//=================================
+// ORTHODOX 
+//=================================
+
 RPN::RPN(){}
 
 RPN::RPN(std::string input){
@@ -132,6 +136,9 @@ std::ostream &operator<<(std::ostream& os, const RPN& current){
 	return (os);
 }
 
+//=================================
+// EXCEPTION
+//=================================
 
 RPN::GeneralError::GeneralError(const std::string msg):msg(msg){}
 const char* RPN::GeneralError::what() const throw(){ return this->msg.c_str(); }

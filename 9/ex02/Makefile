@@ -1,5 +1,5 @@
-NAME = a.out
-SOURCE = main.cpp
+NAME = PmergeMe
+SOURCE = PmergeMe.cpp main.cpp
 OBJ = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
@@ -24,4 +24,4 @@ re: fclean all
 debug:
 	$(CC) $(SANITIZE) $(FLAGS) $(SOURCE) -o $(NAME)
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debugt the winners (A), which is size 150

@@ -6,15 +6,14 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 02:23:39 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/23 00:43:37 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:26:18 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 # define RPN_HPP
 
-#include <bits/std_thread.h>
-#include <ostream>
+#include <iostream>
 #include <string>
 #include <list>
 #include <exception>
@@ -23,7 +22,6 @@ class RPN{
 private:
 	std::list<std::string> expression;
 	int result;
-
 
 	void split(std::string input);
 	bool is_formatted();
