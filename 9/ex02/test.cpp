@@ -13,6 +13,7 @@ int main(void)
 
 	arr.insert(arr.end(), 0);
 
+	std::cout << "RESULT" << std::endl;
 	std::deque<int>::iterator it = arr.begin();
 	for (; it != arr.end(); it++)
 		std::cout << *it << std::endl;

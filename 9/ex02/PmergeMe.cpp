@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:11:17 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/25 14:41:51 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/26 21:28:48 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <iterator>
 #include <ostream>
+#include <cmath>
 
 PmergeMe::PmergeMe(){}
 
@@ -73,40 +74,55 @@ bool PmergeMe::fill_container(char** argv){
 	return (true);
 }
 
-void PmergeMe::insertSchedule(unsigned int start, unsigned int end, std::vector<unsigned int>& order){
-	std::cout << "start :" << start << "end: " << end << std::endl;
-	if (start > end)
-		return ;
-	unsigned int mid = (end - start) / 2;
-	std::cout << "mid: " << mid << std::endl;
-	if (mid == 0)
-		return ;
-	order.push_back(mid);
-	insertSchedule(start, mid - 1, order);
-	insertSchedule(mid + 1, end, order);
+void PmergeMe::insertSchedule(int k, std::vector<unsigned int>& order) {
+    std::vector<int> jacobsthal;
+    int n = 0;
+
+    // Generate Jacobsthal numbers <= k
+    while (true) {
+        int j = ((1 << n) - ((n % 2 == 0) ? 1 : -1)) / 3;
+        if (j > k) break;
+        jacobsthal.push_back(j);
+        n++;
+    }
+
+    // Insert elements in Jacobsthal batches from higher to lower
+    for (int i = jacobsthal.size() - 1; i > 0; --i) {
+        int curr = jacobsthal[i];
+        int prev = jacobsthal[i - 1];
+
+        // Insert from b[curr - 1] down to b[prev]
+        for (int j = curr - 1; j >= prev; --j) {
+            order.push_back(j);
+        }
+    }
+
+    // Finally insert from b[jacobsthal[0] - 1] down to b[0]
+    for (int j = jacobsthal[0] - 1; j >= 0; --j) {
+        order.push_back(j);
+    }
 }
+
 
 void PmergeMe::insert(std::vector<unsigned int>& winner, unsigned int value){
 	std::vector<unsigned int> result;
 	std::vector<unsigned int>::iterator low = winner.begin();
 	std::vector<unsigned int>::iterator high = winner.end();
-	// unsigned int low = 0;
-	// unsigned int high = winner.size();
 	std::vector<unsigned int>::iterator mid;
 
 	while (low < high){
-		std::advance(mid, std::distance(high, low) / 2);
+
+		mid = winner.begin() + std::distance(low, high) / 2;
 		if (value < *mid)
 			high = mid;
 		else
 			low = mid + 1;
 	}
+	winner.insert(low, value);
 }
 
 
 std::vector<unsigned int>	PmergeMe::fortJohnson(std::vector<unsigned int> vectorArr){
-	std::cout << "recursion" << std::endl;
-	std::cout << "base case" << std::endl;
 	if (vectorArr.size() < 2)
 		return vectorArr;
 	if (vectorArr.size() == 2 && vectorArr.at(0) > vectorArr.at(1)){
@@ -120,7 +136,6 @@ std::vector<unsigned int>	PmergeMe::fortJohnson(std::vector<unsigned int> vector
 	std::vector<unsigned int> order;
 	std::vector<unsigned int>::iterator it = vectorArr.begin();
 
-	std::cout << "pair compare" << std::endl;
 	for (; it != vectorArr.end(); it++){
 		unsigned int a = *it++;
 		if (it == vectorArr.end()){
@@ -137,20 +152,29 @@ std::vector<unsigned int>	PmergeMe::fortJohnson(std::vector<unsigned int> vector
 			loser.push_back(a);
 		}
 	}
-	std::cout << "call recursion" << std::endl;
 	winner = fortJohnson(winner);
+	std::cout << "loser size" << loser.size() << std::endl;
 	std::cout << "get loser queue" << std::endl;
-	insertSchedule(0, loser.size() - 1, order);
+	insertSchedule(loser.size(), order);
+	std::vector<unsigned int>::iterator it2 = order.begin();
+	std::cout << order.size() << std::endl;
+	for (; it2 != order.end(); it2++)
+		std::cout << "|" << *it2 << "|" << std::endl;
+
 	std::cout << "insert loser into winner" << std::endl;
-	for (size_t i = 0; i < loser.size(); i++)
+	std::cout << order.size() << " " << loser.size() << std::endl;
+	for (size_t i = 0; i < order.size(); i++)
 		insert(winner, loser.at(order.at(i)));
 	
 	return (winner);
 }
 
 void PmergeMe::sort(){
-	fortJohnson(this->vectorArr);
-
+	this->vectorArr = fortJohnson(this->vectorArr);
+	std::vector<unsigned int>::iterator it = this->vectorArr.begin();
+	std::cout << "RESULT" << std::endl;
+	for (; it != this->vectorArr.end(); it++)
+		std::cout << *it << std::endl;
 }
 
 //=================================
