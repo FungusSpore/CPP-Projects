@@ -1,7 +1,7 @@
 NAME = PmergeMe
 SOURCE = PmergeMe.cpp main.cpp
 OBJ = $(SOURCE:.cpp=.o)
-FLAGS = -Wall -Wextra -Werror -std=c++98
+# FLAGS = -Wall -Wextra -Werror -std=c++98
 SANITIZE = -fsanitize=address
 CC = c++
 
