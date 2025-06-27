@@ -6,16 +6,19 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:22:33 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/27 22:02:30 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/28 01:43:47 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+#include <sys/time.h>
 #include <vector>
 #include <deque>
 #include <string>
+#include <algorithm>
+#include <cstdlib>
 
 // sorting input list
 //
@@ -33,12 +36,80 @@
 // check if input isdigit
 // check for any negative numbers
 
-template <typename Container>
-void insertSchedule(int k, Container& order) {
-	if (k <= 0) 
-		return;
 
-	std::vector<int> jacobsthal;
+class PmergeMe{
+private:
+	long long	vector_time;
+	std::vector<int> vectorArr;
+	long long	deque_time;
+	std::deque<int> dequeArr;
+
+	long long getCurrentTime();
+
+	template <typename Container>
+	void	fortJohnson(Container& vectorArr);
+	template <typename Container>
+	void insertSchedule(int k, Container& order);
+	template <typename Container>
+	void insert(Container& winner, int value);
+	template <typename Container>
+	bool fill_container(char** argv, Container& arr);
+
+
+public:
+	PmergeMe();
+	PmergeMe(const PmergeMe& other);
+	PmergeMe& operator=(const PmergeMe& other);
+	~PmergeMe();
+
+	void sort(char** argv);
+
+	class ParsingError : public std::exception{
+	private:
+		std::string msg;
+	public:
+		ParsingError(const std::string msg);
+		const char* what() const throw();
+		~ParsingError () throw();
+	};
+};
+
+template <typename Container>
+bool PmergeMe::fill_container(char** argv, Container& arr){
+	std::string currentArg;
+	size_t found = 0;
+
+	while (*++argv){
+		currentArg = *argv;
+		while (found != std::string::npos){
+			// trim spaces
+			currentArg.erase(0, currentArg.find_first_not_of(" \t\r\n"));
+			currentArg.erase(currentArg.find_last_not_of(" \t\r\n") + 1);
+
+			// split
+			std::string num_str = currentArg.substr(0, found = currentArg.find(" "));
+			for (size_t i = 0; i < num_str.size(); i++)
+				if (!std::isdigit(num_str.c_str()[i]))
+					throw ParsingError("Error: not a number");
+
+			long num = static_cast<long>(atoi(num_str.c_str()));
+			if (num < 0)
+				throw ParsingError("Error: cannot have negative");
+
+			currentArg.erase(0, currentArg.find(" ") + 1);
+			arr.push_back(num);
+		}
+		found = 0;
+	}
+	return (true);
+}
+
+template <typename Container>
+void PmergeMe::insertSchedule(int k, Container& order) {
+	if (k <= 0) return;
+	
+
+	Container jacobsthal;
 
 	jacobsthal.push_back(0);
 	if (k > 0) 
@@ -53,7 +124,7 @@ void insertSchedule(int k, Container& order) {
 		n++;
 	}
 
-	std::vector<bool> added(k, false);
+	Container added(k, false);
 	for (int i = jacobsthal.size() - 1; i > 0; --i) {
 		int curr = std::min(jacobsthal[i], k - 1);
 		int prev = jacobsthal[i - 1];
@@ -75,7 +146,7 @@ void insertSchedule(int k, Container& order) {
 }
 
 template <typename Container>
-void insert(Container& winner, unsigned int value){
+void PmergeMe::insert(Container& winner, int value){
 	typedef typename Container::iterator iterator;
 	iterator low = winner.begin();
 	iterator high = winner.end();
@@ -93,15 +164,15 @@ void insert(Container& winner, unsigned int value){
 
 
 template <typename Container>
-Container	fortJohnson(Container vectorArr){
-	if (vectorArr.size() < 2)
-		return vectorArr;
+void	PmergeMe::fortJohnson(Container& vectorArr){
+	if (vectorArr.size() < 2) return ;
 	if (vectorArr.size() == 2 && vectorArr.at(0) > vectorArr.at(1)){
 		unsigned int temp = vectorArr.at(0);
 		vectorArr.at(0) = vectorArr.at(1);
 		vectorArr.at(1) = temp;
-		return vectorArr;
+		return ;
 	}
+
 	Container winner;
 	Container loser;
 	Container order;
@@ -123,41 +194,11 @@ Container	fortJohnson(Container vectorArr){
 			loser.push_back(a);
 		}
 	}
-	winner = fortJohnson(winner);
+	fortJohnson(winner);
 	insertSchedule(loser.size(), order);
 	for (size_t i = 0; i < order.size(); i++)
 		insert(winner, loser.at(order.at(i)));
-	
-	return (winner);
+	vectorArr = winner;
 }
-
-class PmergeMe{
-private:
-	std::vector<unsigned int> vectorArr;
-	std::deque<unsigned int> dequeArr;
-	// std::vector<unsigned int>	fortJohnson(std::vector<unsigned int> vectorArr);
-	// void insertSchedule(int k, std::vector<unsigned int>& order);
-	// void insert(std::vector<unsigned int>& winner, unsigned int value);
-
-
-public:
-	PmergeMe();
-	PmergeMe(const PmergeMe& other);
-	PmergeMe& operator=(const PmergeMe& other);
-	~PmergeMe();
-
-	bool fill_container(char** argv);
-	void sort();
-
-	class ParsingError : public std::exception{
-	private:
-		std::string msg;
-	public:
-		ParsingError(const std::string msg);
-		const char* what() const throw();
-		~ParsingError () throw();
-	};
-};
-
 
 #endif

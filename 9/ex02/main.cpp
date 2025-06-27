@@ -6,7 +6,7 @@
 /*   By: jianwong <jianwong@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:16:00 by jianwong          #+#    #+#             */
-/*   Updated: 2025/06/25 13:36:18 by jianwong         ###   ########.fr       */
+/*   Updated: 2025/06/28 01:05:49 by jianwong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int main(int argc, char** argv){
 
 		PmergeMe fj;
 
-		fj.fill_container(argv);
-		fj.sort();
+		// fj.fill_container(argv);
+		fj.sort(argv);
 			
 		return (0);
 	}catch (const std::exception& e){
